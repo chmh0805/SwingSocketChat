@@ -49,7 +49,6 @@ public class ChatServer {
 				ClientThread ct = new ClientThread(socket);
 				ct.start();
 				vc.add(ct);
-				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,9 +91,9 @@ public class ChatServer {
 							for (int i = 0; i < vc.size(); i++) {
 								if (vc.get(i) != this) {
 									vc.get(i).writer.println(textTemp);
-									fout.write(textTemp + "\n");
 								}
 							}
+							fout.write(textTemp + "\n");
 						} else if (dto.getTo() != null) {
 							for (int i = 0; i < vc.size(); i++) {
 								if (vc.get(i).id.equalsIgnoreCase(dto.getTo())) {

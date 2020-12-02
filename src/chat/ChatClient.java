@@ -166,8 +166,7 @@ public class ChatClient extends JFrame implements AppFrame {
 		}
 		if (gubun[0].equalsIgnoreCase(Protocol.TO)) {
 			dto.setTo(gubun[1]);
-			dto.setText(text.substring(text.lastIndexOf(":")));
-			System.out.println(TAG + text.substring(text.indexOf(":")));
+			dto.setText(text.substring(text.lastIndexOf(":")+1));
 		} else {
 			dto.setText(text);
 		}
