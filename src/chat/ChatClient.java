@@ -140,6 +140,8 @@ public class ChatClient extends JFrame implements AppFrame {
 			socket = new Socket(host, Protocol.PORT);
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			writer = new PrintWriter(socket.getOutputStream(), true);
+			tfText.setText("IdSettingCode:" + id);
+			send();
 			ReaderThread rt = new ReaderThread();
 			rt.start();
 			taChatList.append("[공지] " + id + "님, 채팅방에 입장하신 것을 환영합니다.\n");
@@ -155,13 +157,17 @@ public class ChatClient extends JFrame implements AppFrame {
 		String text = tfText.getText();
 		Gson gson = new Gson();
 		String[] gubun = text.split(":");
+		if (text.contains("IdSettingCode")) {
+			dto.setGubun("IdSettingCode");
+		}
 		if (text.equals("")) {
 			taChatList.append("[공지] 보낼 내용을 입력하세요.\n");
 			return;
 		}
 		if (gubun[0].equalsIgnoreCase(Protocol.TO)) {
 			dto.setTo(gubun[1]);
-			dto.setText(text.substring(text.indexOf(":")));
+			dto.setText(text.substring(text.lastIndexOf(":")));
+			System.out.println(TAG + text.substring(text.indexOf(":")));
 		} else {
 			dto.setText(text);
 		}

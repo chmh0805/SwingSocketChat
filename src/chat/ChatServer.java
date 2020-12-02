@@ -84,20 +84,25 @@ public class ChatServer {
 					minute = Integer.toString(LocalDateTime.now().getMinute());
 					second = Integer.toString(LocalDateTime.now().getSecond());
 					String textTemp = "[" + hour + ":" + minute + ":" + second + "]" + "[" + dto.getId() + "] " + dto.getText();
-					if (dto.getTo() == null) {
-						for (int i = 0; i < vc.size(); i++) {
-							if (vc.get(i) != this) {
-								vc.get(i).writer.println(textTemp);
+					if (dto.getGubun().equals("IdSettingCode")) {
+						this.id = dto.getId();
+					}
+					if (!(textTemp.contains("IdSettingCode"))) {
+						if (dto.getTo() == null) {
+							for (int i = 0; i < vc.size(); i++) {
+								if (vc.get(i) != this) {
+									vc.get(i).writer.println(textTemp);
+									fout.write(textTemp + "\n");
+								}
 							}
-						}
-					} else if (dto.getTo() != null) {
-						for (int i = 0; i < vc.size(); i++) {
-							if (vc.get(i).id.equalsIgnoreCase(this.id)) {
-								vc.get(i).writer.println(textTemp);
+						} else if (dto.getTo() != null) {
+							for (int i = 0; i < vc.size(); i++) {
+								if (vc.get(i).id.equalsIgnoreCase(dto.getTo())) {
+									vc.get(i).writer.println(textTemp);
+								}
 							}
 						}
 					}
-					fout.write(textTemp + "\n");
 				}
 			} catch (IOException e) {
 				System.out.println(TAG + "연결 종료");
