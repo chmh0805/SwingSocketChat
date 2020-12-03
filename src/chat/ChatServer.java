@@ -89,9 +89,7 @@ public class ChatServer {
 					if (!(textTemp.contains("IdSettingCode"))) {
 						if (dto.getTo() == null) {
 							for (int i = 0; i < vc.size(); i++) {
-								if (vc.get(i) != this) {
-									vc.get(i).writer.println(textTemp);
-								}
+								vc.get(i).writer.println(textTemp);
 							}
 							fout.write(textTemp + "\n");
 						} else if (dto.getTo() != null) {

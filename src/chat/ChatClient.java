@@ -131,7 +131,6 @@ public class ChatClient extends JFrame implements AppFrame {
 				e.printStackTrace();
 			}
 		}
-		
 	}
 	
 	private void connect() {
@@ -141,6 +140,8 @@ public class ChatClient extends JFrame implements AppFrame {
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			writer = new PrintWriter(socket.getOutputStream(), true);
 			tfText.setText("IdSettingCode:" + id);
+			send();
+			tfText.setText(id + "¥‘¿Ã ¿‘¿Â«œºÃΩ¿¥œ¥Ÿ.");
 			send();
 			ReaderThread rt = new ReaderThread();
 			rt.start();
